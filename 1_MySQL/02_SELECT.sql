@@ -201,7 +201,8 @@ WHERE hire_date BETWEEN '1990-01-01' AND '2001-01-01';
     
     '_' : 1글자
     비교대상컬럼 LIKE '_문자' => 비교대상컬럼값에 문자앞에 무조건 한글자가 올 경우 조회
-    비교대상컬럼 LIKE '__문자' => 비교대상컬럼값에 문자앞에 무조건 두글자가 올 경우 조회
+    비교대상컬럼 LIKE '_
+    _문자' => 비교대상컬럼값에 문자앞에 무조건 두글자가 올 경우 조회
     비교대상컬럼 LIKE '_문자_' => 비교대상컬럼값에 문자 앞과 뒤에 무조건 한글자씩 올 경우 조회
 */
 -- 사원들 중 성이 전씨인 사원들의 사원명(emp_name), 
@@ -245,6 +246,7 @@ WHERE NOT email LIKE '___ㅂ_%' ESCAPE 'ㅂ';
 SELECT emp_id, emp_name, bonus, salary
 FROM employee
 WHERE bonus IS NULL;
+
 
 -- 부서배치를 아직 받지 않고 보너스는 받은 사원들의
 -- 이름 , 보너스 ,부서코드 조회
@@ -318,6 +320,7 @@ LIMIT 10 OFFSET 1;
 -- 1. 직급코드(job_code)가 J7이거나 J2인 사원들 중
 -- 	급여(salary)가 200만원 이상인 사원들의 모든 컬럼 조회
 SELECT *
+
 FROM employee
 WHERE job_code IN ('j7', 'j2') AND salary >=2000000;
 -- 2. 사수가 없고 부서배치도 받지 않은 사원들의 사원명(emp_name),

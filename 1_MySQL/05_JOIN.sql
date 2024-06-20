@@ -241,21 +241,53 @@ WHERE  job_name ='대리' AND local_name LIKE 'ASIA%';
 SELECT emp_name, emp_no, dept_title, job_name
 FROM employee
 JOIN job USING(job_code)
-JOIN department ON(dept_code = dept_id);
-WHERE 
+JOIN department ON(dept_code = dept_id)
+WHERE emp_no LIKE '7%' AND substr(emp_no, 8, 1) IN (2, 4);
+
 -- 3. 보너스를 받은 직원들의 직원명, 보너스, 연봉, 부서명, 근무지역 조회
+SELECT emp_name, bonus, salary*12, dept_title, local_name
+FROM employee
+JOIN job USING(job_code)
+JOIN department ON(dept_code = dept_id)
+JOIN location ON (location_id = local_code)
+WHERE bonus is not null;
+
 
 -- 4. 한국과 일본에서 근무하는 직원들의 직원명, 부서명, 근무지역, 근무국가 조회
+SELECT emp_name, dept_title, local_name, national_name
+FROM employee
+JOIN department ON(dept_code = dept_id)
+JOIN location ON (location_id = local_code)
+JOIN national USING(national_code)
+WHERE national_name ='한국' or national_name ='일본';
 
 -- 5. 각 부서별 평균 급여를 조회하여 부서명, 평균 급여 조회
+SELECT dept_title, salary, avg(salary)
+FROM employee
+JOIN department ON (dept_code = dept_id)
+GROUP BY dept_code, salary;
+
 
 -- 6. 각 부서별 총 급여의 합이 1000만원 이상인 부서명, 급여 합 조회
+SELECT dept_title, sum(salary)"총급여"
+FROM employee
+JOIN department ON (dept_code = dept_id)
+GROUP BY dept_title
+HAVING sum(salary) >= '10000000';
+
 
 -- 7. 사번, 직원명, 직급명, 급여 등급, 구분 조회
 -- 	 	이때 구분에 해당하는 값은 아래 참고!
 -- 		급여 등급이 S1, S2인경우 '고급'
 -- 		급여 등급이 S3, S4인경우 '중급'
 -- 		급여 등급이 S5, S6인경우 '초급'
+SELECT emp_id, emp_name, salary, sal_level
+FROM employee
+JOIN job USING(job_code)
+JOIN department ON(dept_code = dept_id)
+JOIN sal_grade ON (min_sal <= salary AND salary <= max_sal)
+WHERE sal_level = 'S1' OR 'S2'
+
 
 
 -- 8. 보너스를 받지 않은 직원들 중 직급 코드가 J4 또는 J7인 직원들의
