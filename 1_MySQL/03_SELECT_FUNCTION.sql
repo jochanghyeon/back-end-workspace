@@ -371,7 +371,8 @@ SELECT sum(case when dept_code = 'D5' then salary * 12 end)
 FROM employee;
 
 /*
-	AVG
+	
+    
     - 해당 컬럼 값들의 평균값을 반환 
     - 모든 그룹 함수는 NULL 값을 자동으로 제외하기 때문에 
       AVG 함수를 사용할 때는 COALESCE 또는 IFNULL 함수와 함께 사용하는 걸 권장 
