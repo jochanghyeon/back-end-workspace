@@ -411,3 +411,6 @@ CREATE TABLE employee_copy
 SELECT emp_id, emp_name, salary, salary * 12 FROM kh.employee;
 
 SELECT * FROM employee_copy;
+
+select*
+from department

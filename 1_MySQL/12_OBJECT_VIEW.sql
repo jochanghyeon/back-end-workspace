@@ -135,6 +135,7 @@ where job_code = 'j0'; -- 가능
 CREATE OR REPLACE VIEW vw_job
 AS SELECT job_name FROM job;
 
+
 -- job_code가 primark key ! 즉 not null 제약조건에 걸림!
 INSERT INTO vw_job
 VALUES('인턴'); -- ERROR CODE 1423
