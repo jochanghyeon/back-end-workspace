@@ -248,7 +248,7 @@ public class C_For {
 		C_For c = new C_For();
 //		c.method1();
 //		c.method2();
-		// c.method3();
+		 c.method3();
 		// c.method4();
 		// c.method5();
 		//c.method6();
@@ -258,6 +258,6 @@ public class C_For {
 		//c.method10();
 		//c.method11();
 		//c.method12();
-		c.method13();
+//		c.method13();
 	}
 }
