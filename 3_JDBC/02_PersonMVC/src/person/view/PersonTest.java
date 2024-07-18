@@ -17,12 +17,12 @@ public class PersonTest {
 			
 			// 이 부분은 테스트 용도로만! 
 			// person 테이블에 데이터 추가
-			//pt.addPerson("박세영", 5, "서울");
-			//pt.addPerson("배영운", 6, "경기");
-			//pt.addPerson("이동호", 7, "서울");
-			//pt.updatePerson(new Person(1, "김진주", 8, "제주"));
-			//pt.removePerson(1);
-			//pt.searchAllPerson();
+			pt.addPerson("박세영", 5, "서울");
+			pt.addPerson("배영운", 6, "경기");
+			pt.addPerson("이동호", 7, "서울");
+			pt.updatePerson(new Person(1, "김진주", 8, "제주"));
+			pt.removePerson(1);
+			pt.searchAllPerson();
 			pt.searchPerson(2);
 			
 		} catch (SQLException e) {
