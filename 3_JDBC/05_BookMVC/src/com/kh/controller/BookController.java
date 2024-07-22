@@ -17,7 +17,7 @@ public class BookController {
 
 	Properties p = new Properties();
 	
-private BookController() {
+public BookController() {
 	
 	
 	try {
@@ -131,18 +131,21 @@ public boolean idCheck(String id) throws SQLException {
 	}
 
 	// 3. 대여 취소
-	public void deleteRent() {
+	public boolean deleteRent(int no) {
+		return 
 		// printRentBook 매서드 호출하여 내가 대여한 책 조회 출력 후
 		// 취소할 대여 번호 선택을 사용자한테 입력 받아
 		// 취소에 성공하면 "성공적으로 대여를 취소했습니다." 출력
 		// 실패하면 "대여를 취소하는데 실패했습니다." 출력
 	}
 
-	// 4. 회원탈퇴
-	public void deleteMember() {
-		// 회원탈퇴에 성공하면 "회원탈퇴 하였습니다 ㅠㅠ" 출력
-		// 실패하면 "회원탈퇴하는데 실패했습니다." 출력
-	}
-
+	// 5. 회원탈퇴
+	public int deleteMember() throws SQLException {
+		Connection conn = connect();
+		String query = "DELETE FROM member_no = ?";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setInt(1, memberNo);
+		int result = ps.executeUpdate();
+		close(ps, conn);
 
 }
