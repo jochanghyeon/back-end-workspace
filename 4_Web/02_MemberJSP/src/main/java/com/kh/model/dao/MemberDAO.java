@@ -5,10 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.kh.model.vo.Member;
 
 public class MemberDAO {
+
 	public MemberDAO() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -18,7 +20,7 @@ public class MemberDAO {
 	}
 	
 	public Connection connect() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/sample", "root", "qwer1234");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/member", "root", "qwer1234");
 	}
 	
 	public void close(PreparedStatement ps, Connection conn) throws SQLException {
@@ -31,51 +33,56 @@ public class MemberDAO {
 		close(ps, conn);
 	}
 	
-	// 4. 회원가입
-	public void registerMember(String id, String password, String name) throws SQLException {
-		Connection conn = connect();
-		String query = "INSERT INTO member(member_id, member_pwd, member_name) VALUES(?, ?, ?)";
-		PreparedStatement ps = conn.prepareStatement(query);
-		ps.setString(1, id);
-		ps.setString(2, password);
-		ps.setString(3, name);
-		ps.executeUpdate();
-		close(ps, conn);
-	}
-	
-	// 5. 로그인
-	public Member login(String id, String password) throws SQLException {
+	// 회원가입 - member 스키마의 member 테이블
+	public void registerMember(String id, String pwd, String name) throws SQLException {
 		Connection conn = connect();
 		
-		String query = "SELECT * FROM member WHERE member_id = ? AND member_pwd = ?";
+		String query = "INSERT INTO member VALUES(?, ?, ?)";
 		PreparedStatement ps = conn.prepareStatement(query);
+		
 		ps.setString(1, id);
-		ps.setString(2, password);
+		ps.setString(2, pwd);
+		ps.setString(3, name);
+		
+		ps.executeUpdate();
+		
+		close(ps, conn);
+		
+	}
+	
+	// 전체 회원 보기
+	public ArrayList<Member> showAllMember() throws SQLException {
+		Connection conn = connect();
+		
+		String query = "SELECT * FROM member";
+		PreparedStatement ps = conn.prepareStatement(query);
 		
 		ResultSet rs = ps.executeQuery();
-		Member member = new Member();
-		if(rs.next()) {
-			member.setMemberId(id);
-			member.setMemberPwd(password);
-			member.setMemberName(rs.getString("member_name"));
-			member.setMemberNo(rs.getInt("member_no"));
-			member.setStatus(rs.getString("status").charAt(0));
-		}
+		ArrayList<Member> list = new ArrayList<>();
 		
+		while(rs.next()) {
+			list.add(new Member(rs.getString("id"), 
+								rs.getString("password"), 
+								rs.getString("name")));
+		}
 		close(rs, ps, conn);
-
-		return member;
+		return list;
 	}
-	
-	// 5. 회원탈퇴
-	public int deleteMember(int memberNo) throws SQLException {
+	public void searchMember(String id) throws SQLException {
 		Connection conn = connect();
-		String query = "DELETE FROM member WHERE member_no = ?";
+		
+		String query = "SELECT * FROM member WHERE id = ?";
 		PreparedStatement ps = conn.prepareStatement(query);
-		ps.setInt(1, memberNo);
-		int result = ps.executeUpdate();
-		close(ps, conn);
-		return result;
+		ps.setString(1, id);
+		
+		ResultSet rs = ps.executeQuery();
+		Member member= null;
+		if(rs.next()) member = new Member(id, rs.getString("password"), rs.getString("name"));
+		
+		close(rs,ps,conn);
+		
+		{
+			
+		}
 	}
-	
 }

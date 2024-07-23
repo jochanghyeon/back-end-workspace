@@ -1,7 +1,5 @@
 package com.kh.model.vo;
 
-import java.util.concurrent.Flow.Publisher;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

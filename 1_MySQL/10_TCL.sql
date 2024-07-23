@@ -1,3 +1,5 @@
+select *
+from member;
 /*
 	TCL(Transaction Control Language)
     - 트랜잭션을 제어하는 언어 
