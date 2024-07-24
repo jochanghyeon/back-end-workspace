@@ -18,6 +18,7 @@ public class viewServlet extends HttpServlet {
        
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. DAO - showAllMember
+		// 전체보기
 		MemberDAO dao = new MemberDAO();
 		ArrayList<Member> list = null;
 		try {

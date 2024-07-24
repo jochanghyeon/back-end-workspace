@@ -20,7 +20,7 @@ public class MemberDAO {
 	}
 	
 	public Connection connect() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/member", "root", "qwer1234");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/sample3", "root", "qwer1234");
 	}
 	
 	public void close(PreparedStatement ps, Connection conn) throws SQLException {
