@@ -1,3 +1,4 @@
+<%@page import="model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,10 +9,12 @@
 </head>
 <body>
 	<h1>해당 회원 정보 경과</h1>
+	<% Member member = (Member)request.getAttribute("member"); %>
 	<ul>
-	<li>아이디 : </li>
-	<li>비밀번호 : </li>
-	<li>이름 : </li>
+		<li>아이디 : <%=member.getId()%> </li>
+		<li>비밀번호 :<%=member.getPassword()%> </li>
+		<li>이름 : <%=member.getName()%></li>
 	</ul>
+	<a href="/">메인 페이지로 이동</a>
 </body>
 </html>
