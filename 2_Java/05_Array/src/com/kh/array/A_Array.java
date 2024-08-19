@@ -22,6 +22,7 @@ public class A_Array {
 	 * 배열의 선언과 초기화 동시 진행
 	 * 자료형[] 배열명 = new 자료형[배열크기];
 	 * */
+	
 	public void method1() {
 		int[] nums = new int[5]; // 배열크기 지정하지 않으면 에러!
 		System.out.println(nums);
@@ -143,10 +144,10 @@ public class A_Array {
 
 	public static void main(String[] args) {
 		A_Array a = new A_Array();
-		//a.method1();
+		a.method1();
 		//a.method2();
 		//a.method3();
-		//a.method4();
+		a.method4();
 		//a.method5();
 		//a.method6();
 	}

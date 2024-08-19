@@ -49,6 +49,7 @@ public class B_Switch {
 			default:
 				System.out.println("잘못입력했습니다");
 		}
+		
 	}
 	
 	/*
